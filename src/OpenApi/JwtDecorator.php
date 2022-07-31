@@ -42,7 +42,7 @@ final class JwtDecorator implements OpenApiFactoryInterface
                 ],
                 'password' => [
                     'type' => 'string',
-                    'example' => 'apassword',
+                    'example' => 'password',
                 ],
             ],
         ]);
@@ -55,11 +55,15 @@ final class JwtDecorator implements OpenApiFactoryInterface
         ]);
 
         $pathItem = new Model\PathItem(
-            ref: 'JWT Token',
-            post: new Model\Operation(
-                operationId: 'postCredentialsItem',
-                tags: ['Token'],
-                responses: [
+            'JWT Token',
+            'Get JWT token to login.',
+           '',
+           null,
+           null,
+           new Model\Operation(
+                'postCredentialsItem',
+                 ['Token'],
+                [
                     '200' => [
                         'description' => 'Get JWT token',
                         'content' => [
@@ -71,10 +75,13 @@ final class JwtDecorator implements OpenApiFactoryInterface
                         ],
                     ],
                 ],
-                summary: 'Get JWT token to login.',
-                requestBody: new Model\RequestBody(
-                    description: 'Generate new JWT Token',
-                    content: new \ArrayObject([
+               'Get JWT token to login.',
+                 "",
+                 null,
+                 [],
+                 new Model\RequestBody(
+                    'Generate new JWT Token',
+                     new \ArrayObject([
                         'application/json' => [
                             'schema' => [
                                 '$ref' => '#/components/schemas/Credentials',
@@ -82,10 +89,12 @@ final class JwtDecorator implements OpenApiFactoryInterface
                         ],
                     ]),
                 ),
-                security: [],
+                null,
+                false,
+                [],
             ),
         );
-        $openApi->getPaths()->addPath('/authentication_token', $pathItem);
+        $openApi->getPaths()->addPath('/api/login', $pathItem);
 
         return $openApi;
     }
